@@ -8,7 +8,12 @@ namespace HotelManagement.Concrete
     {
         public Hotel createHotel(Hotel hotel)
         {
-            throw new NotImplementedException();
+            using (var hotelDbContext = new HotelDbContext())
+            {
+                hotelDbContext.Hotels.Add(hotel);
+                hotelDbContext.SaveChanges();
+                return hotel;
+            }
         }
 
         public Hotel DeleteHotel(int id)
@@ -40,7 +45,12 @@ namespace HotelManagement.Concrete
 
         public Hotel UpdateHotel(Hotel hotel)
         {
-            throw new NotImplementedException();
+            using (var hotelDbContext = new HotelDbContext())
+            {
+                hotelDbContext.Hotels.Update(hotel);
+                hotelDbContext.SaveChanges();
+                return hotel;
+            }
         }
     }
 }
