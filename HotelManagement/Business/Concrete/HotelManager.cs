@@ -15,7 +15,7 @@ namespace HotelManagement.Business.Concrete
         }
         public Hotel CreateHotel(Hotel hotel)
         {
-            return _hotelRepository.createHotel(hotel);
+            return _hotelRepository.CreateHotel(hotel);
         }
 
         public Hotel DeleteHotel(int id)
@@ -33,6 +33,12 @@ namespace HotelManagement.Business.Concrete
 
             throw new System.Exception("Id cannot be less than 1");
             
+        }
+
+        public Hotel GetHotelByName(string name)
+        {
+            
+            return _hotelRepository.GetHotelByName(name);
         }
 
         public List<Hotel> GetlAllHotels()

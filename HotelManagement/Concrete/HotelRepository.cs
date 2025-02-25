@@ -6,7 +6,7 @@ namespace HotelManagement.Concrete
 {
     public class HotelRepository : IHotelRepository
     {
-        public Hotel createHotel(Hotel hotel)
+        public Hotel CreateHotel(Hotel hotel)
         {
             // Create a new instance of HotelDbContext
             using (var hotelDbContext = new HotelDbContext())
@@ -42,6 +42,14 @@ namespace HotelManagement.Concrete
             using (var hotelDbContext = new HotelDbContext())
             {
                 return hotelDbContext.Hotels.Find(id);
+            }
+        }
+
+        public Hotel GetHotelByName(string name)
+        {
+           using (var hotelDbContext = new HotelDbContext())
+            {
+                return hotelDbContext.Hotels.FirstOrDefault(x => x.Name.ToLower() == name.ToLower());
             }
         }
 

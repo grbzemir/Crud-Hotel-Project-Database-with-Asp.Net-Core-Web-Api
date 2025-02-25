@@ -15,6 +15,7 @@ namespace HotelManagement.Controllers
         {
             _hotelService = hotelService;
         }
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -23,9 +24,25 @@ namespace HotelManagement.Controllers
             return Ok(hotels);
         }
 
-        [HttpGet("{id}")]
 
-        public IActionResult Get(int id)
+        [HttpGet]
+        [Route("[action]/{name}")]
+        public IActionResult GetHotelByName(string name)
+        {
+            
+            var hotel = _hotelService.GetHotelByName(name);
+            
+            if(hotel != null)
+            {
+                return Ok(hotel);
+            }
+
+            return NotFound();
+        }
+
+        [HttpGet]
+        [Route("[action]/{id}")] //api/hotels/GetHotelById/1
+        public IActionResult GetHotelById(int id)
         {
             var hotel =  _hotelService.GetHotelById(id);
 
@@ -39,8 +56,9 @@ namespace HotelManagement.Controllers
         }
 
         [HttpPost]
+        [Route("CreateHotel")]
 
-        public IActionResult Post([FromBody] Hotel hotel)
+        public IActionResult CreatHotel([FromBody] Hotel hotel)
         {
            
             if(ModelState.IsValid)
@@ -53,8 +71,9 @@ namespace HotelManagement.Controllers
         }
 
         [HttpPut]
+        [Route("[action]")]
 
-        public IActionResult Put([FromBody] Hotel hotel)
+        public IActionResult UpdateHotel([FromBody] Hotel hotel)
         {
             if(_hotelService.GetHotelById(hotel.Id) != null)
             {
@@ -64,9 +83,9 @@ namespace HotelManagement.Controllers
             return BadRequest(ModelState);
         }
 
-        [HttpDelete("{id}")]
-
-        public IActionResult Delete(int id)
+        [HttpDelete]
+        [Route("[action]/{id}")]
+        public IActionResult DeleteHotel(int id)
         {
             if (_hotelService.GetHotelById(id) != null)
             {

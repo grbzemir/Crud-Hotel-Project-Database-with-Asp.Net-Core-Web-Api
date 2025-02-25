@@ -7,6 +7,7 @@ namespace HotelManagement.Business.Abstract
 
         List<Hotel> GetlAllHotels();
         Hotel GetHotelById(int id);
+        Hotel GetHotelByName(string name);
         Hotel CreateHotel(Hotel hotel);
         Hotel UpdateHotel(Hotel hotel);
         Hotel DeleteHotel(int id);
