@@ -8,6 +8,7 @@ namespace HotelManagement.Concrete
     {
         public Hotel createHotel(Hotel hotel)
         {
+            // Create a new instance of HotelDbContext
             using (var hotelDbContext = new HotelDbContext())
             {
                 hotelDbContext.Hotels.Add(hotel);
@@ -18,6 +19,7 @@ namespace HotelManagement.Concrete
 
         public Hotel DeleteHotel(int id)
         {
+            // Delete a new instance of HotelDbContext
             using (var hotelDbContext = new HotelDbContext())
             {
                 var deletedHotel = hotelDbContext.Hotels.Find(id);
@@ -45,6 +47,7 @@ namespace HotelManagement.Concrete
 
         public Hotel UpdateHotel(Hotel hotel)
         {
+            //Update a new instance of HotelDbContext
             using (var hotelDbContext = new HotelDbContext())
             {
                 hotelDbContext.Hotels.Update(hotel);
