@@ -21,6 +21,7 @@ namespace HotelManagement.Business.Concrete
         public Hotel DeleteHotel(int id)
         {
            return _hotelRepository.DeleteHotel(id);
+
         }
 
         public Hotel GetHotelById(int id)

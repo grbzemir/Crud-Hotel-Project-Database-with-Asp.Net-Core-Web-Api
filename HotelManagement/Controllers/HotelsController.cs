@@ -16,38 +16,66 @@ namespace HotelManagement.Controllers
             _hotelService = hotelService;
         }
         [HttpGet]
-        public List<Hotel> Get()
+        public IActionResult Get()
         {
 
-           return _hotelService.GetlAllHotels();
+            var hotels = _hotelService.GetlAllHotels();
+            return Ok(hotels);
         }
 
         [HttpGet("{id}")]
 
-        public Hotel Get(int id)
+        public IActionResult Get(int id)
         {
-            return _hotelService.GetHotelById(id);
+            var hotel =  _hotelService.GetHotelById(id);
+
+            if(hotel !=null)
+            {
+
+                return Ok(hotel);
+            }
+
+            return NotFound();
         }
 
         [HttpPost]
 
-        public Hotel Post([FromBody] Hotel hotel)
+        public IActionResult Post([FromBody] Hotel hotel)
         {
-            return _hotelService.CreateHotel(hotel);
+           
+            if(ModelState.IsValid)
+            {
+                var createHotel =  _hotelService.CreateHotel(hotel);
+                return CreatedAtAction("Get", new {id = createHotel.Id}, createHotel);
+            }
+
+            return BadRequest(ModelState);
         }
 
         [HttpPut]
 
-        public Hotel Put([FromBody] Hotel hotel)
+        public IActionResult Put([FromBody] Hotel hotel)
         {
-            return _hotelService.UpdateHotel(hotel);
+            if(_hotelService.GetHotelById(hotel.Id) != null)
+            {
+                return Ok(_hotelService.UpdateHotel(hotel));
+            }
+
+            return BadRequest(ModelState);
         }
 
         [HttpDelete("{id}")]
 
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-           _hotelService.DeleteHotel(id);
+            if (_hotelService.GetHotelById(id) != null)
+            {
+                _hotelService.DeleteHotel(id);
+                return Ok(new { message = "Silme işlemi başarılı oldu." });
+
+            }
+
+            return NotFound(new { message = "Belirtilen otel bulunamadı." });
         }
     }
 }
