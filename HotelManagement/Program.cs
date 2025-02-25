@@ -1,3 +1,7 @@
+using HotelManagement.Abstract;
+using HotelManagement.Business.Abstract;
+using HotelManagement.Business.Concrete;
+using HotelManagement.Concrete;
 using HotelManagement.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +13,9 @@ builder.Services.AddDbContext<HotelDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
+builder.Services.AddSingleton<IHotelRepository, HotelRepository>();
+builder.Services.AddSingleton<IHotelService, HotelManager>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
