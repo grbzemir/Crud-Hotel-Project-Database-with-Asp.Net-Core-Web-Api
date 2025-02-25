@@ -25,7 +25,13 @@ namespace HotelManagement.Business.Concrete
 
         public Hotel GetHotelById(int id)
         {
-            return _hotelRepository.GetHotelById(id);
+            if(id>0)
+            {
+                return _hotelRepository.GetHotelById(id);
+            }
+
+            throw new System.Exception("Id cannot be less than 1");
+            
         }
 
         public List<Hotel> GetlAllHotels()
