@@ -17,6 +17,7 @@ namespace HotelManagement.Concrete
             }
         }
 
+
         public Hotel DeleteHotel(int id)
         {
             // Delete a new instance of HotelDbContext
